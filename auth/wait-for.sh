@@ -5,8 +5,8 @@ HOST=""
 PORT=""
 
 while [ "$1" != "" ]; do
-    PARAM=`echo $1 | awk -F= '{print $1}'`
-    VALUE=`echo $1 | awk -F= '{print $2}'`
+    PARAM=$(echo "$1" | awk -F= '{print $1}')
+    VALUE=$(echo "$1" | awk -F= '{print $2}')
     case $PARAM in
         *:* )
             HOST=${PARAM%:*}
@@ -23,7 +23,7 @@ done
 
 while ! nc -z "$HOST" "$PORT"; do
     echo "waiting for $HOST:$PORT for $TIMEOUT seconds..."
-    sleep $TIMEOUT
+    sleep "$TIMEOUT"
 done
 
 echo "$HOST:$PORT is available"
